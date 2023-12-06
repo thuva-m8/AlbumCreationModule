@@ -1,23 +1,15 @@
 'use client'
 import Link from "next/link";
 
-export default function Example() {
+export default function albumForm() {
     return (
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-20">
-            <Link href="/album">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" className="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/>
-                </svg>
-            </Link>
             <form className="mt-10">
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>
-                            <h3 className="text-lg leading-6 font-medium text-blue-700">Create an album</h3>
-
+                            <h3 className="text-lg leading-6 font-medium text-blue-800">Create an album</h3>
                         </div>
-
                         <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                             <div
                                 className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -31,6 +23,7 @@ export default function Example() {
                                         <input
                                             type="text"
                                             name="username"
+                                            placeholder='album title'
                                             id="username"
                                             autoComplete="username"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -49,6 +42,7 @@ export default function Example() {
                 <textarea
                     id="about"
                     name="about"
+                    placeholder="description"
                     rows={3}
                     className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
                     defaultValue={''}
@@ -82,7 +76,7 @@ export default function Example() {
                                             <div className="flex text-sm text-gray-600">
                                                 <label
                                                     htmlFor="file-upload"
-                                                    className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                    className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                                                 >
                                                     <span>Upload a Photo</span>
                                                     <input id="file-upload" name="file-upload" type="file"
@@ -90,7 +84,7 @@ export default function Example() {
                                                 </label>
                                                 <p className="pl-1">or drag and drop</p>
                                             </div>
-                                            <p className="text-xs text-gray-500">PNG, JPG 10MB</p>
+                                            <p className="text-xs text-gray-500">PNG, JPG</p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,13 +97,13 @@ export default function Example() {
                     <div className="flex justify-end">
                         <button
                             type="button"
-                            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-100"
+                            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-100"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-100"
+                            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-100"
                         >
                             Save
                         </button>

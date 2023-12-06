@@ -3,15 +3,25 @@ import {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import Link from "next/link";
-
+import {usePathname} from "next/navigation";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+const navigation = [
+    {name: 'Home', href: '/'},
+    {name: 'Principals', href: '#'},
+    {name: 'Events', href: '#'},
+    {name: 'Gallery', href: '/album'},
+    {name: 'Teachers', href: '#'}
+]
+
 export default function navbar() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const pathname = usePathname();
     return (
-        <Disclosure as="nav" className="bg-white shadow">
+        <Disclosure as="nav" className="bg-white shadow sticky top-0 z-50">
             {({open}) => (
                 <>
                     <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-96">
@@ -37,39 +47,20 @@ export default function navbar() {
                                     />
 
                                 </div>
-                                <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                                    {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                                    <Link
-                                        href="/"
-                                        className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-m font-medium"
-                                    >
-                                        Home
-                                    </Link>
-                                    <Link
-                                        href="#"
-                                        className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-m font-medium"
-                                    >
-                                        Principals
-                                    </Link>
-                                    <Link
-                                        href="#"
-                                        className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-m font-medium"
-                                    >
-                                        Events
-                                    </Link>
-                                    <Link
-                                        href="/album"
-                                        className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-m font-medium"
-                                    >
-                                        Gallery
-                                    </Link>
-                                    <Link
-                                        href="#"
-                                        className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-m font-medium"
-                                    >
-                                        Teachers
-                                    </Link>
-
+                                <div
+                                    className="hidden sm:ml-6 sm:flex sm:space-x-8 items-center text-blue-800 px-1 pt-1 text-m font-medium ">
+                                    {navigation.map((item) => {
+                                        const isActive = pathname.endsWith(item.href);
+                                        return (
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                className={isActive ? '' : 'border-transparent text-gray-500  hover:text-gray-700 hover:border-gray-300'}
+                                            >
+                                                {item.name}
+                                            </a>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
