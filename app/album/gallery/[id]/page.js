@@ -11,25 +11,21 @@ const products = [
         id: 1,
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
-        href: '#',
     },
     {
         id: 2,
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
-        href: '#',
     },
     {
         id: 3,
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
-        href: '#',
     },
     {
         id: 4,
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
-        href: '#',
     },
 
 
@@ -99,7 +95,7 @@ export default function Example() {
                 <DeletePop open={openModel} setOpen={setModelOpen}/>
 
                 <div className="text-center py-16 px-4 sm:px-6 lg:px-8">
-                    <h1 className="text-2xl font-extrabold tracking-tight text-gray-900"></h1>
+                    <h1 className="text-2xl font-extrabold tracking-tight text-gray-900">Album title</h1>
                 </div>
 
                 {/* Filters */}
