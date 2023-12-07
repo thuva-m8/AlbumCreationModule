@@ -1,7 +1,8 @@
 'use client'
-import Link from "next/link";
 
 export default function albumForm() {
+
+
     return (
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-20">
             <form className="mt-10">

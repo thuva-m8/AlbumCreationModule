@@ -8,61 +8,12 @@ import Link from "next/link";
 const products1 = [
     {
         id: 1,
-        name: 'Focus Paper Refill',
+        name: 'album title',
         href: '',
-        price: '$13',
-        description: '3 sizes available',
+        createdAt: '2023/12/6',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-01.jpg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
-    {
-        id: 2,
-        name: 'Focus Card Holder',
-        href: '#',
-        price: '$64',
-        description: 'Walnut',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-02.jpg',
-        imageAlt: 'Paper card sitting upright in walnut card holder on desk.',
-    },
-    {
-        id: 3,
-        name: 'Focus Carry Pouch',
-        href: '#',
-        price: '$32',
-        description: 'Heather Gray',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg',
-        imageAlt: 'Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.',
-    },
-    {
-        id: 7,
-        name: 'Electric Kettle',
-        href: '#',
-        price: '$149',
-        description: 'Black',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-07.jpg',
-        imageAlt: 'Close up of long kettle spout pouring boiling water into pour-over coffee mug with frothy coffee.',
-    },
-    {
-        id: 8,
-        name: 'Leather Workspace Pad',
-        href: '#',
-        price: '$165',
-        description: 'Black',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-08.jpg',
-        imageAlt:
-            'Extra large black leather workspace pad on desk with computer, wooden shelf, desk organizer, and computer peripherals.',
-    },
-    {
-        id: 9,
-        name: 'Leather Long Wallet',
-        href: '#',
-        price: '$118',
-        description: 'Natural',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-09.jpg',
-        imageAlt:
-            'Leather long wallet held open with hand-stitched card dividers, full-length bill pocket, and simple tab closure.',
-    },
-    // More products...
 ]
 
 
@@ -98,19 +49,19 @@ export default function Example() {
 
                 <main>
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <div className="py-24 text-center">
+                        <div className="py-10 text-center">
                             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Gallery</h1>
                         </div>
                         <div className="flex justify-end">
                             <Link href="album/create-album">
                                 <button
                                     type="submit"
-                                    className="inline-flex justify-center px-3.5 py-2 border border-blue-700 bg-blue-100 text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-100"
+                                    className="inline-flex justify-center px-3.5 py-2 border border-blue-700 bg-blue-100 text-sm font-medium rounded-md text-blue-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-100"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         stroke-width="1.5"
+                                         strokeWidth="1.5"
                                          stroke="currentColor" className="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                        <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M12 4.5v15m7.5-7.5h-15"/>
                                     </svg>
                                     Create an album
@@ -124,21 +75,22 @@ export default function Example() {
                         <section aria-labelledby="products-heading" className="mt-8">
 
 
-                            <div className="grid grid-cols-1 gap-y-20 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8">
+                            <div
+                                className="grid grid-cols-1 gap-y-20 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-20">
                                 {products1.map((product) => (
                                     <a key={product.id} href={`album/gallery/${product.id}`} className="group">
                                         <div
-                                            className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
+                                            className="w-full aspect-w-1 aspect-h-10 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
                                             <img
                                                 src={product.imageSrc}
                                                 alt={product.imageAlt}
-                                                className="w-full h-full object-center object-cover group-hover:opacity-75"
+                                                className="w-full h-96 object-center object-cover group-hover:opacity-75"
                                             />
                                         </div>
                                         <div
-                                            className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                                            <h3>{product.name}</h3>
-                                            <p>{product.price}</p>
+                                            className="mt-4 flex items-center justify-between ">
+                                            <h3 className='text-m font-medium text-gray-900'>{product.name}</h3>
+                                            <p className=' font-medium text-sm text-opacity-30 text-gray-900'>{product.createdAt}</p>
                                         </div>
                                     </a>
                                 ))}

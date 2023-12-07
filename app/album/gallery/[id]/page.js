@@ -1,50 +1,33 @@
 'use client'
 import {Fragment, useState} from 'react'
-import {Dialog, Disclosure, Menu, Popover, Tab, Transition} from '@headlessui/react'
-import {MenuIcon, SearchIcon, ShoppingBagIcon, UserIcon, XIcon} from '@heroicons/react/outline'
-import {ChevronDownIcon, FilterIcon, StarIcon} from '@heroicons/react/solid'
+import {Dialog, Disclosure, Menu, Transition} from '@headlessui/react'
+import {XIcon} from '@heroicons/react/outline'
 import Link from "next/link";
 import {useParams} from "next/navigation"
-import DeletePop from './delete/page'
+import DeletePop from '../component/deleteModel'
 
 const products = [
     {
         id: 1,
-        name: 'Organize Basic Set (Walnut)',
-        price: '$149',
-        rating: 5,
-        reviewCount: 38,
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
         href: '#',
     },
     {
         id: 2,
-        name: 'Organize Pen Holder',
-        price: '$15',
-        rating: 5,
-        reviewCount: 18,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-02.jpg',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
         href: '#',
     },
     {
         id: 3,
-        name: 'Organize Sticky Note Holder',
-        price: '$15',
-        rating: 5,
-        reviewCount: 14,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-03.jpg',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
         href: '#',
     },
     {
         id: 4,
-        name: 'Organize Phone Holder',
-        price: '$15',
-        rating: 4,
-        reviewCount: 21,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-04.jpg',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
         href: '#',
     },
@@ -58,18 +41,16 @@ function classNames(...classes) {
 
 export default function Example() {
     const [open, setOpen] = useState(false)
+    const [openModel, setModelOpen] = useState(false)
 
     const params = useParams();
     return (
-
         <div className="bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 mt-20">
-            <DeletePop open={open} setOpen={setOpen}/>
-
             <Link href="/album">
-                {/*<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"*/}
-                {/*     stroke="currentColor" class="w-6 h-6">*/}
-                {/*    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"/>*/}
-                {/*</svg>*/}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                     stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"/>
+                </svg>
             </Link>
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
@@ -115,9 +96,10 @@ export default function Example() {
             </Transition.Root>
 
             <main className="pb-24">
+                <DeletePop open={openModel} setOpen={setModelOpen}/>
+
                 <div className="text-center py-16 px-4 sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-extrabold tracking-tight text-gray-900"></h1>
-
                 </div>
 
                 {/* Filters */}
@@ -126,7 +108,6 @@ export default function Example() {
                     aria-labelledby="filter-heading"
                     className="relative z-10 border-t border-b border-gray-200 grid items-center"
                 >
-
                     <div className="col-start-1 row-start-1 py-4">
                         <div className="flex justify-end max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <Menu as="div" className="relative inline-block">
@@ -139,13 +120,15 @@ export default function Example() {
                                         >
                                             Edit
                                         </Link>
+
                                         <button
                                             type="button"
                                             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600"
-                                            onClick={() => setOpen(true)}
+                                            onClick={() => setModelOpen(true)}
                                         >
                                             Delete
                                         </button>
+
                                     </div>
                                 </div>
                             </Menu>
@@ -157,16 +140,16 @@ export default function Example() {
                 <section aria-labelledby="products-heading"
                          className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">
                     <div
-                        className="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+                        className="mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
                         {products.map((product) => (
                             <div key={product.id}
                                  className="group relative p-4 border-r border-b border-gray-200 sm:p-6">
                                 <div
-                                    className="rounded-lg overflow-hidden bg-gray-200 aspect-w-1 aspect-h-1 group-hover:opacity-75">
+                                    className=" overflow-hidden bg-gray-200 aspect-w-10 aspect-h-100 group-hover:opacity-90">
                                     <img
                                         src={product.imageSrc}
-                                        // alt={product.imageAlt}
-                                        className="w-full h-full object-center object-cover"
+                                        alt={product.imageAlt}
+                                        className="w-full h-full object-center"
                                     />
                                 </div>
                                 <div className="pt-10 pb-4 text-center">
@@ -187,8 +170,6 @@ export default function Example() {
                 {/* Pagination */}
 
             </main>
-
-
         </div>
     )
 }
