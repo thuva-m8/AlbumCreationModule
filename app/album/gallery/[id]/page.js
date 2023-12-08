@@ -91,10 +91,10 @@ export default function Example() {
                 </Dialog>
             </Transition.Root>
 
-            <main className="pb-24">
+            <main className=" pb-24">
                 <DeletePop open={openModel} setOpen={setModelOpen}/>
 
-                <div className="text-center py-16 px-4 sm:px-6 lg:px-8">
+                <div className="text-center py-4 px-4 sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-extrabold tracking-tight text-gray-900">Album title</h1>
                 </div>
 

@@ -4,7 +4,7 @@ export default function albumForm() {
 
 
     return (
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-20">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
             <form className="mt-10">
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
