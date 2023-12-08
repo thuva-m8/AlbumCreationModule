@@ -6,6 +6,7 @@ import {useParams} from "next/navigation";
 
 export default function edit() {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const params = useParams();
     return (
         <div>

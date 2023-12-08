@@ -4,6 +4,7 @@ import {Dialog, Disclosure, Menu, Popover, Tab, Transition} from '@headlessui/re
 import {MenuIcon, QuestionMarkCircleIcon, SearchIcon, ShoppingBagIcon, XIcon} from '@heroicons/react/outline'
 import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
 import Link from "next/link";
+import Image from "next/image";
 
 const products1 = [
     {

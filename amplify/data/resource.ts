@@ -13,15 +13,16 @@ const schema = a.schema({
             id: a.string(),
             name: a.string(),
             description: a.string(),
-            cover_image_ur: a.string(),
+            cover_image_url: a.string(),
             type: a.string(),
-            photos:a.hasMany('Photo')
-        }),
+            photos: a.hasMany('Photo')
+        })
+    .authorization([a.allow.owner(), a.allow.public().to(['read'])]),
     Photo: a
         .model({
-            id:a.string(),
-            image_url:a.string(),
-            album:a.belongsTo('Album')
+            id: a.string(),
+            image_url: a.string(),
+            album: a.belongsTo('Album')
         })
         .authorization([a.allow.owner(), a.allow.public().to(['read'])]),
 });
