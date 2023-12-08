@@ -5,7 +5,7 @@ import AlbumForm from '/app/albumForm'
 export default function Example() {
     return (
         <div>
-            <div className='max-w-7xl mx-auto sm:px-6 lg:px-8 mt-20'>
+            <div className='max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10'>
                 <Link href="/album">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                          stroke="currentColor" className="w-6 h-6">
