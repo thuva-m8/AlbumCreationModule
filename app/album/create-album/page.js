@@ -2,7 +2,7 @@
 import Link from "next/link";
 import AlbumForm from '/app/albumForm'
 
-export default function Example() {
+export default function CreateAlbum() {
     return (
         <div>
             <div className='max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10'>

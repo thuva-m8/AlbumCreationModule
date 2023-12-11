@@ -27,8 +27,6 @@ const products = [
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
         imageAlt: 'TODO',
     },
-
-
 ]
 
 function classNames(...classes) {

@@ -1,10 +1,8 @@
 'use client'
-import {Fragment, useState} from 'react'
-import {Dialog, Disclosure, Menu, Popover, Tab, Transition} from '@headlessui/react'
-import {MenuIcon, QuestionMarkCircleIcon, SearchIcon, ShoppingBagIcon, XIcon} from '@heroicons/react/outline'
-import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
+import {Fragment, useState, useEffect} from 'react'
+import {Dialog, Transition} from '@headlessui/react'
 import Link from "next/link";
-import Image from "next/image";
+import {generateClient} from 'aws-amplify/data'
 
 const products1 = [
     {
@@ -17,15 +15,27 @@ const products1 = [
     },
 ]
 
+const client = generateClient()
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Album() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [album, setAlbum] = useState([])
 
+    const listAlbum = async () => {
+        const response  = await client.models.Album?.list()
+        console.log(response, 'response')
+
+        // setAlbum(data)
+
+    }
+    useEffect(() => {
+        listAlbum()
+    }, []);
     return (
         <div className="bg-gray-50">
             <div>
@@ -57,11 +67,11 @@ export default function Example() {
                             <Link href="album/create-album">
                                 <button
                                     type="submit"
-                                    className="inline-flex justify-center px-3.5 py-2 border border-blue-700 bg-blue-100 text-sm font-medium rounded-md text-blue-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-100"
+                                    className="inline-flex justify-center px-3.5 py-2 border border-blue-800 bg-blue-50 text-sm rounded-md text-blue-700 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-100"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth="1.5"
-                                         stroke="currentColor" className="w-6 h-6">
+                                         stroke="currentColor" className="w-5 h-5">
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M12 4.5v15m7.5-7.5h-15"/>
                                     </svg>
