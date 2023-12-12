@@ -3,7 +3,9 @@
 import {useState} from 'react'
 
 export default function albumForm({onSubmit}) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [albumTitle, setAlbumTitle] = useState('')
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [description, setDescription] = useState('')
 
     const handleAlbumTitle = (e) => {
@@ -39,8 +41,8 @@ export default function albumForm({onSubmit}) {
                         <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                             <div
                                 className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label htmlFor="username"
-                                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                <label
+                                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                     Album title
                                 </label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -61,8 +63,8 @@ export default function albumForm({onSubmit}) {
 
                             <div
                                 className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label htmlFor="about"
-                                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                <label
+                                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                     Description
                                 </label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -77,8 +79,8 @@ export default function albumForm({onSubmit}) {
                             </div>
                             <div
                                 className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label htmlFor="cover-photo"
-                                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                <label
+                                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                     Upload Photos
                                 </label>
                                 {/*<div className="mt-1 sm:mt-0 sm:col-span-2">*/}
@@ -101,7 +103,6 @@ export default function albumForm({onSubmit}) {
                                 {/*            </svg>*/}
                                 {/*            <div className="flex text-sm text-gray-600">*/}
                                 {/*                <label*/}
-                                {/*                    htmlFor="file-upload"*/}
                                 {/*                    className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"*/}
                                 {/*                >*/}
                                 {/*                    <span>Upload a Photo</span>*/}
