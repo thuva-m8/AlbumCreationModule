@@ -1,11 +1,8 @@
 import './globals.css'
 import {Inter} from 'next/font/google'
-import {Amplify} from 'aws-amplify';
-import config from '@/amplifyconfiguration.json';
-
-Amplify.configure(config);
-
 import Navbar from './navbar'
+import ConfigureAmplifyClientSite from "./components/configureAmplifyClientSite";
+
 
 const inter = Inter({subsets: ['latin']})
 
@@ -15,6 +12,7 @@ export default function Layout({children}) {
         <body className={inter.className}>
         <Navbar/>
         <div className="min-w-full">
+            <ConfigureAmplifyClientSite/>
             <main className="">{children}</main>
         </div>
         </body>
