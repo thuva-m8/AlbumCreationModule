@@ -1,8 +1,16 @@
 'use client'
 import Link from "next/link";
 import AlbumForm from '/app/albumForm'
+import {generateClient} from "aws-amplify/data";
+
+const client = generateClient()
 
 export default function CreateAlbum() {
+
+    const createAlbum = async (newAlbum) => {
+        const {errors, data: album} = await client.models.Album.create(newAlbum)
+    }
+
     return (
         <div>
             <div className='max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10'>
@@ -14,7 +22,7 @@ export default function CreateAlbum() {
                     </svg>
                 </Link>
             </div>
-            <AlbumForm/>
+            <AlbumForm onSubmit={createAlbum}/>
         </div>
 
     )

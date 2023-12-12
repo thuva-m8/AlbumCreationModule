@@ -4,16 +4,6 @@ import {Dialog, Transition} from '@headlessui/react'
 import Link from "next/link";
 import {generateClient} from 'aws-amplify/data'
 
-const products1 = [
-    {
-        id: 1,
-        name: 'album title',
-        href: '',
-        createdAt: '2023/12/6',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-01.jpg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-    },
-]
 
 const client = generateClient()
 
@@ -27,15 +17,14 @@ export default function Album() {
     const [album, setAlbum] = useState([])
 
     const listAlbum = async () => {
-        const response  = await client.models.Album?.list()
-        console.log(response, 'response')
-
-        // setAlbum(data)
-
+        const {data: items, errors} = await client.models.Album.list()
+        setAlbum(items)
     }
+
     useEffect(() => {
         listAlbum()
-    }, []);
+    }, [])
+
     return (
         <div className="bg-gray-50">
             <div>
@@ -88,7 +77,7 @@ export default function Album() {
 
                             <div
                                 className="grid grid-cols-1 gap-y-20 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-20">
-                                {products1.map((product) => (
+                                {album.map((product) => (
                                     <a key={product.id} href={`album/gallery/${product.id}`} className="group">
                                         <div
                                             className="w-full aspect-w-1 aspect-h-10 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
@@ -101,7 +90,7 @@ export default function Album() {
                                         <div
                                             className="mt-4 flex items-center justify-between ">
                                             <h3 className='text-m font-medium text-gray-900'>{product.name}</h3>
-                                            <p className=' font-medium text-sm text-opacity-30 text-gray-900'>{product.createdAt}</p>
+                                            <p className=' font-medium text-sm text-opacity-30 text-gray-900'>{product.createdAt.toLocaleLowerCase().slice(0, 10)}</p>
                                         </div>
                                     </a>
                                 ))}
