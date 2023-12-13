@@ -17,14 +17,14 @@ const schema = a.schema({
             type: a.string(),
             photos: a.hasMany('Photo')
         })
-        .authorization([a.allow.owner(), a.allow.public()]),
+        .authorization([a.allow.public()]),
     Photo: a
         .model({
             id: a.string(),
             image_url: a.string(),
             album: a.belongsTo('Album')
         })
-        .authorization([a.allow.owner(), a.allow.public()]),
+        .authorization([a.allow.public()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

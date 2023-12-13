@@ -1,13 +1,24 @@
 'use client'
 import AlbumForm from '/app/albumForm'
 import Link from "next/link";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
+import {generateClient} from "aws-amplify/data";
 
-
+const client = generateClient()
 export default function edit() {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const params = useParams();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter()
+
+    const updateAnAlbum = async (newAlbum) => {
+        newAlbum.id = params.id
+        const {errors, data: album} = await client.models.Album.update(newAlbum)
+        router.push(`/album/gallery/${params.id}`)
+
+    }
+
     return (
         <div>
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
@@ -19,7 +30,7 @@ export default function edit() {
                     </svg>
                 </Link>
             </div>
-            <AlbumForm/>
+            <AlbumForm onSubmit={updateAnAlbum}/>
         </div>
     )
 }

@@ -1,31 +1,38 @@
 'use client'
-import {Fragment, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {Dialog, Disclosure, Menu, Transition} from '@headlessui/react'
 import {XIcon} from '@heroicons/react/outline'
 import Link from "next/link";
 import {useParams} from "next/navigation"
 import DeletePop from '../component/deleteModel'
+import {generateClient} from "aws-amplify/data";
+
+const client = generateClient()
 
 const products = [
     {
-        id: 1,
+        id: '1',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
-        imageAlt: 'TODO',
+        imageAlt: 'dfdfd'
     },
     {
-        id: 2,
+        id: '2',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
-        imageAlt: 'TODO',
+        imageAlt: 'dfdfd'
     },
     {
-        id: 3,
+        id: '3',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
-        imageAlt: 'TODO',
+        imageAlt: 'dfdfd'
+
+
     },
     {
-        id: 4,
+        id: '4',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg',
-        imageAlt: 'TODO',
+        imageAlt: 'dfdfd'
+
+
     },
 ]
 
@@ -33,10 +40,27 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function AlbumPhotoList() {
     const [open, setOpen] = useState(false)
     const [openModel, setModelOpen] = useState(false)
+    const [albumTitle, setAlbumTitle] = useState([])
+    const [description, setDescription] = useState([])
+    const [albumCreatedAt, setAlbumCreatedAt] = useState([])
+    const getAnAlbumDetails = async () => {
+        const {data: items, errors} = await client.models.Album.get({id: params.id})
+        setAlbumTitle(items.name)
+        setDescription(items.description)
+        setAlbumCreatedAt(items.createdAt.toLocaleLowerCase().slice(0, 10))
 
+
+    }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (params.id) {
+            getAnAlbumDetails()
+        }
+    }, [])
     const params = useParams();
     return (
         <div className="bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
@@ -93,7 +117,13 @@ export default function Example() {
                 <DeletePop open={openModel} setOpen={setModelOpen}/>
 
                 <div className="text-center py-4 px-4 sm:px-6 lg:px-8">
-                    <h1 className="text-2xl font-extrabold tracking-tight text-gray-900">Album title</h1>
+                    <h1 className="text-lg font-bold tracking-tight text-gray-900">{albumTitle}</h1>
+                </div>
+                <div>
+                    <h1 className="text- font-medium tracking-tight text-gray-900">{description}</h1>
+                </div>
+                <div>
+                    <h1 className="text-sm tracking-tight text-gray-400">{albumCreatedAt}</h1>
                 </div>
 
                 {/* Filters */}
@@ -158,17 +188,8 @@ export default function Example() {
                                         className="w-full h-full object-center"
                                     />
                                 </div>
-                                <div className="pt-10 pb-4 text-center">
-                                    <h3 className="text-sm font-medium text-gray-900">
-                                        <a href={product.href}>
-                                            <span aria-hidden="true" className="absolute inset-0"/>
-                                            {product.name}
-                                        </a>
-                                    </h3>
-
-                                    <p className="mt-4 text-base font-medium text-gray-900">{product.price}</p>
-                                </div>
                             </div>
+
                         ))}
                     </div>
                 </section>

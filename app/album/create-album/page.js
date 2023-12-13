@@ -2,13 +2,16 @@
 import Link from "next/link";
 import AlbumForm from '/app/albumForm'
 import {generateClient} from "aws-amplify/data";
+import {useRouter} from "next/navigation";
 
 const client = generateClient()
 
 export default function CreateAlbum() {
+    const router = useRouter()
 
     const createAlbum = async (newAlbum) => {
         const {errors, data: album} = await client.models.Album.create(newAlbum)
+        router.push('/album')
     }
 
     return (
