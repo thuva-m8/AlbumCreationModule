@@ -1,5 +1,5 @@
 'use client'
-import {Fragment, useRef, useState} from 'react'
+import {Fragment, useEffect, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {ExclamationIcon} from '@heroicons/react/outline'
 import {useParams} from "next/navigation"
@@ -14,6 +14,7 @@ export default function Delete({open, setOpen}) {
     const cancelButtonRef = useRef(null)
     const params = useParams()
     const router = useRouter()
+    const [albumName, setAlbumName] = useState([])
 
 
     const toBeDeletedAlbum = {
@@ -24,6 +25,18 @@ export default function Delete({open, setOpen}) {
         setOpen(false)
         router.push('/album')
     }
+    const getAnAlbumDetails = async () => {
+        const {data: items, errors} = await client.models.Album.get({id: params.id})
+        setAlbumName(items.name)
+
+    }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (params.id) {
+            getAnAlbumDetails()
+        }
+    }, [])
     return (
         <div>
             <Transition.Root show={open} as={Fragment}>
@@ -71,7 +84,7 @@ export default function Delete({open, setOpen}) {
                                             </Dialog.Title>
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
-                                                    Are you sure you want to delete Id - {params.id} album?
+                                                    Are you sure you want to delete Id {albumName} album?
                                                 </p>
                                             </div>
                                         </div>
