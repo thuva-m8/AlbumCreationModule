@@ -89,7 +89,7 @@ export default function Album() {
                                         </div>
                                         <div
                                             className="mt-4 flex items-center justify-between ">
-                                            <h1 className='text-sm font-medium text-gray-900'>{product.name}</h1>
+                                            <h1 className='text-sm overflow-hidden whitespace-nowrap truncate font-medium text-gray-900'>{product.name}</h1>
                                             <p className=' font-medium text-sm text-opacity-30 text-gray-900'>{product.createdAt.toLocaleLowerCase().slice(0, 10)}</p>
                                         </div>
                                     </a>
