@@ -9,7 +9,40 @@ import {generateClient} from "aws-amplify/data";
 
 const client = generateClient()
 
-const products = []
+const products = [
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+    // {
+    //     id:'1',
+    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
+    // },
+]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
