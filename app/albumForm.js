@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from 'react'
 import {generateClient} from "aws-amplify/data";
-import {useParams, usePathname} from "next/navigation"
+import {useParams, usePathname, useRouter} from "next/navigation"
 
 const client = generateClient()
 export default function albumForm({onSubmit}) {
@@ -35,25 +35,13 @@ export default function albumForm({onSubmit}) {
         setDescription('');
     };
 
-    // const handleUpdate = (e) => {
-    //     e.preventDefault();
-    //
-    //     const existingAlbum = {
-    //         name: albumTitle,
-    //         description: description
-    //     };
-    //
-    //     // Pass the newAlbum data to the parent component's onSubmit function
-    //     onAlbum(existingAlbum);
-    //
-    //     // Optionally, you can clear the form fields or perform other actions after creating/updating the album.
-    //     // setAlbumTitle('');
-    //     // setDescription('');
-    // };
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const params = useParams()
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const pathName = usePathname()
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter()
     const getAnAlbumDetails = async () => {
         const {data: items, errors} = await client.models.Album.get({id: params.id})
         setAlbumTitle(items.name)
@@ -74,7 +62,7 @@ export default function albumForm({onSubmit}) {
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>
-                            <h3 className="text-lg leading-6 font-medium text-blue-800">Create an album</h3>
+                            <h3 className="text-lg leading-6 font-medium text-blue-800">{pathName === '/album/create-album' ? 'Create an album' : 'Edit an album'}</h3>
                         </div>
                         <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                             <div
@@ -163,6 +151,13 @@ export default function albumForm({onSubmit}) {
                         <button
                             type="button"
                             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-100"
+                            onClick={() => {
+                                if (pathName === '/album/create-album') {
+                                    router.push('/album');
+                                } else {
+                                    router.push(`/album/gallery/${params.id}`)
+                                }
+                            }}
                         >
                             Cancel
                         </button>

@@ -120,7 +120,7 @@ export default function AlbumPhotoList() {
                     <h1 className="text-lg font-bold tracking-tight text-gray-900">{albumTitle}</h1>
                 </div>
                 <div>
-                    <h1 className="text- font-medium tracking-tight text-gray-900">{description}</h1>
+                    <h1 className="text-sm tracking-tight text-gray-900">{description}</h1>
                 </div>
                 <div>
                     <h1 className="text-sm tracking-tight text-gray-400">{albumCreatedAt}</h1>

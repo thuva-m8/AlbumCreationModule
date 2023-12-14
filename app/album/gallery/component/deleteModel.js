@@ -84,7 +84,7 @@ export default function Delete({open, setOpen}) {
                                             </Dialog.Title>
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
-                                                    Are you sure you want to delete Id {albumName} album?
+                                                    Are you sure you want to delete <span className='font-bold'>{albumName}</span> album?
                                                 </p>
                                             </div>
                                         </div>
