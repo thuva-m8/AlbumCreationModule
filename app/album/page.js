@@ -76,20 +76,20 @@ export default function Album() {
 
 
                             <div
-                                className="grid grid-cols-1 gap-y-20 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-20">
+                                className="grid grid-cols-1 gap-y-20 sm:grid-cols-2 gap-x-6 lg:grid-cols-4 xl:gap-x-20">
                                 {album.map((product) => (
                                     <a key={product.id} href={`album/gallery/${product.id}`} className="group">
                                         <div
-                                            className="w-full aspect-w-1 aspect-h-10 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
+                                            className="w-full aspect-w-1 aspect-h-6 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
                                             <img
-                                                src={product.imageSrc}
+                                                src={product.cover_image_url}
                                                 alt={product.imageAlt}
-                                                className="w-full h-96 object-center object-cover group-hover:opacity-75"
+                                                className="w-full h-80 object-center object-cover group-hover:opacity-75"
                                             />
                                         </div>
                                         <div
                                             className="mt-4 flex items-center justify-between ">
-                                            <h3 className='text-m font-medium text-gray-900'>{product.name}</h3>
+                                            <h1 className='text-sm font-medium text-gray-900'>{product.name}</h1>
                                             <p className=' font-medium text-sm text-opacity-30 text-gray-900'>{product.createdAt.toLocaleLowerCase().slice(0, 10)}</p>
                                         </div>
                                     </a>

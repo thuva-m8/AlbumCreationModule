@@ -57,7 +57,7 @@ export default function albumForm({onSubmit}) {
     }, [])
 
     return (
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
+        <div className="max-w-7xl bg-gray-50 mx-auto sm:px-6 lg:py-6 lg:px-10 mt-10 rounded-2xl">
             <form className="mt-10">
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
@@ -81,8 +81,7 @@ export default function albumForm({onSubmit}) {
                                             name="username"
                                             placeholder='album title'
                                             autoComplete="username"
-                                            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        />
+                                            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                                     </div>
                                 </div>
                             </div>
