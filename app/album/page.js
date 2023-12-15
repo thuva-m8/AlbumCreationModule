@@ -3,7 +3,7 @@ import {Fragment, useState, useEffect} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import Link from "next/link";
 import {generateClient} from 'aws-amplify/data'
-import {SearchIcon} from "@heroicons/react/solid";
+import {getUrl} from "aws-amplify/storage";
 
 
 const client = generateClient()
@@ -18,14 +18,28 @@ export default function Album() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [album, setAlbum] = useState([])
 
+
+    const setCoverImage = async (data) => {
+        return data.map(async item => {
+            if (item.cover_image_url) {
+                const response = await getUrl({key: item.cover_image_url})
+                item.cover_image_url = response.url.href
+            }
+        })
+    }
+
+
     const listAlbum = async () => {
         const {data: items, errors} = await client.models.Album.list()
+        // set image url
         setAlbum(items)
+        await setCoverImage(items)
     }
 
     useEffect(() => {
         listAlbum()
     }, [])
+
 
     return (
         <div className="bg-gray-50">
@@ -86,8 +100,8 @@ export default function Album() {
                                             <div
                                                 className="w-full aspect-w-1 aspect-h-6 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
                                                 <img
-                                                    src='https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-                                                    alt={product.imageAlt}
+                                                    src={product.cover_image_url}
+                                                    alt={product.name}
                                                     className="w-full h-80 object-center object-cover group-hover:opacity-75"
                                                 />
                                             </div>

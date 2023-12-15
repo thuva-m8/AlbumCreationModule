@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react'
 import {generateClient} from "aws-amplify/data";
 import {useParams, usePathname, useRouter} from "next/navigation"
+import {uploadData} from "aws-amplify/storage";
 
 const client = generateClient()
 export default function albumForm({onSubmit}) {
@@ -11,6 +12,8 @@ export default function albumForm({onSubmit}) {
     const [description, setDescription] = useState('')
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [album, setAlbum] = useState([])
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [albumCover, setAlbumCover] = useState('')
 
     const handleAlbumTitle = (e) => {
         setAlbumTitle(e.target.value)
@@ -24,7 +27,8 @@ export default function albumForm({onSubmit}) {
 
         const newAlbum = {
             name: albumTitle,
-            description: description
+            description: description,
+            cover_image_url: albumCover
         };
 
         // Pass the newAlbum data to the parent component's onSubmit function
@@ -35,6 +39,21 @@ export default function albumForm({onSubmit}) {
         setDescription('');
     };
 
+    const uploadImage = async (e) => {
+        const file = e.target.files[0];
+        console.log(file)
+        try {
+            const result = await uploadData({
+                key: file.name,
+                data: file
+            }).result;
+            setAlbumCover(result.key)
+            console.log('Succeeded: ', result);
+        } catch (error) {
+            console.log('Error : ', error);
+        }
+    }
+
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const params = useParams()
@@ -42,6 +61,7 @@ export default function albumForm({onSubmit}) {
     const pathName = usePathname()
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const router = useRouter()
+
     const getAnAlbumDetails = async () => {
         const {data: items, errors} = await client.models.Album.get({id: params.id})
         setAlbumTitle(items.name)
@@ -131,8 +151,11 @@ export default function albumForm({onSubmit}) {
                                                     className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                                                 >
                                                     <span>Upload a Photo</span>
-                                                    <input id="file-upload" name="file-upload" type="file"
-                                                           className="sr-only"/>
+                                                    <input
+                                                        name="file-upload"
+                                                        type="file"
+                                                        onChange={uploadImage}
+                                                        className="sr-only"/>
                                                 </label>
                                                 <p className="pl-1">or drag and drop</p>
                                             </div>

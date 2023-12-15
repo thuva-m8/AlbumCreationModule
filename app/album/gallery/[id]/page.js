@@ -9,40 +9,7 @@ import {generateClient} from "aws-amplify/data";
 
 const client = generateClient()
 
-const products = [
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-    // {
-    //     id:'1',
-    //     imageSrc:'https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg'
-    // },
-]
+const products = []
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -54,13 +21,14 @@ export default function AlbumPhotoList() {
     const [albumTitle, setAlbumTitle] = useState([])
     const [description, setDescription] = useState([])
     const [albumCreatedAt, setAlbumCreatedAt] = useState([])
+    const [imageUrl, setImageUrl] = useState([])
+
+
     const getAnAlbumDetails = async () => {
         const {data: items, errors} = await client.models.Album.get({id: params.id})
         setAlbumTitle(items.name)
         setDescription(items.description)
         setAlbumCreatedAt(items.createdAt.toLocaleLowerCase().slice(0, 10))
-
-
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
