@@ -1,5 +1,5 @@
 'use client'
-import {Fragment, useState, useEffect} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import Link from "next/link";
 import {generateClient} from 'aws-amplify/data'
@@ -9,10 +9,6 @@ import {getUrl} from "aws-amplify/storage";
 const client = generateClient()
 
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
 export default function Album() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -20,22 +16,27 @@ export default function Album() {
 
 
     const setCoverImage = async (data) => {
-        return data.map(async item => {
+        return await Promise.all(data.map(async (item) => {
             if (item.cover_image_url) {
                 const response = await getUrl({key: item.cover_image_url})
                 item.cover_image_url = response.url.href
+            } else {
+                item.cover_image_url =
+                    'https://image.pngaaa.com/768/791768-middle.png';
             }
-        })
+            return item; // Return the updated item
+        }));
     }
 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const listAlbum = async () => {
         const {data: items, errors} = await client.models.Album.list()
         // set image url
-        setAlbum(items)
         await setCoverImage(items)
+        console.log(items, 'items')
+        await setAlbum(items);
     }
-
     useEffect(() => {
         listAlbum()
     }, [])
@@ -66,7 +67,7 @@ export default function Album() {
                 <main>
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                         <div className="py-10 text-center">
-                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Gallery</h1>
+                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Gallery </h1>
                         </div>
                         <div className="flex justify-end">
 
@@ -99,9 +100,10 @@ export default function Album() {
                                         <a key={product.id} href={`album/gallery/${product.id}`} className="group">
                                             <div
                                                 className="w-full aspect-w-1 aspect-h-6 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img
                                                     src={product.cover_image_url}
-                                                    alt={product.name}
+                                                    alt='check'
                                                     className="w-full h-80 object-center object-cover group-hover:opacity-75"
                                                 />
                                             </div>

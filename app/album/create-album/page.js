@@ -27,6 +27,5 @@ export default function CreateAlbum() {
             </div>
             <AlbumForm onSubmit={createAlbum}/>
         </div>
-
     )
 }

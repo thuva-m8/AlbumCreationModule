@@ -5,8 +5,6 @@ import {ExclamationIcon} from '@heroicons/react/outline'
 import {useParams} from "next/navigation"
 import {generateClient} from "aws-amplify/data";
 import {useRouter} from "next/navigation";
-import {CheckCircleIcon} from '@heroicons/react/outline'
-import {XIcon} from '@heroicons/react/solid'
 
 const client = generateClient()
 

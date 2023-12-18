@@ -6,6 +6,8 @@ import Link from "next/link";
 import {useParams} from "next/navigation"
 import DeletePop from '../component/deleteModel'
 import {generateClient} from "aws-amplify/data";
+import {getUrl, list, uploadData} from "aws-amplify/storage";
+import Image from "next/image";
 
 const client = generateClient()
 
@@ -22,7 +24,22 @@ export default function AlbumPhotoList() {
     const [description, setDescription] = useState([])
     const [albumCreatedAt, setAlbumCreatedAt] = useState([])
     const [imageUrl, setImageUrl] = useState([])
+    const [image, setImage] = useState([])  // image file
+    const [albumCover, setAlbumCover] = useState([])  // image file
+    const [photos, setPhotos] = useState([])  // image file
 
+    // const setCoverImage = async (data) => {
+    //     return await Promise.all(data.map(async (item) => {
+    //         if (item.cover_image_url) {
+    //             const response = await getUrl({key: item.cover_image_url})
+    //             item.cover_image_url = response.url.href
+    //         } else {
+    //             item.cover_image_url =
+    //                 'https://image.pngaaa.com/768/791768-middle.png';
+    //         }
+    //         return item; // Return the updated item
+    //     }));
+    // }
 
     const getAnAlbumDetails = async () => {
         const {data: items, errors} = await client.models.Album.get({id: params.id})
@@ -30,6 +47,61 @@ export default function AlbumPhotoList() {
         setDescription(items.description)
         setAlbumCreatedAt(items.createdAt.toLocaleLowerCase().slice(0, 10))
     }
+
+    const getPhotos = async () => {
+        try {
+            const response = await list({
+                prefix: `gallery/album/${params.id}/`,
+                options: {
+                    listAll: true
+                }
+            });
+
+            await getImgUrl(response.items)
+            // render list items from response.items
+            // console.log(response, 'j')
+        } catch (error) {
+            console.log('Error ', error);
+        }
+    }
+
+    const getImgUrl = async (keys) => {
+        try {
+            console.log(keys)
+            let photos = [];
+            return await Promise.all(keys.map(async (key) => {
+                const response = await getUrl({key: key.key});
+                console.log(response, 'response')
+                // photos.push(response.url.href)
+                // console.log(photos)
+                setPhotos(photos)
+            }))
+        } catch (error) {
+            console.log('Error ', error);
+        }
+    }
+
+    const uploadImage = async (e) => {
+        const file = Array.from(e.target.files)[0]
+        console.log(file, 'file')
+        setImage(file)
+        try {
+            const result = await uploadData({
+                key: `gallery/album/${params.id}/` + file.name,
+                data: file,
+            }).result;
+            await setAlbumCover(result.key)
+            console.log('Succeeded: ', result);
+        } catch (error) {
+            console.log('Error : ', error);
+        }
+
+    }
+
+    useEffect(() => {
+        getPhotos()
+    }, []);
+
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
@@ -151,17 +223,18 @@ export default function AlbumPhotoList() {
                 {/* Product grid */}
                 <section aria-labelledby="products-heading"
                          className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">
-                    {products.length ?
+                    {photos.length ?
                         <div
                             className="mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-                            {products.map((product) => (
-                                <div key={product.id}
+                            {photos.map((product, index) => (
+                                <div key={index}
                                      className="group relative p-4 border-r border-b border-gray-200 sm:p-6">
                                     <div
                                         className=" overflow-hidden bg-gray-200 aspect-w-10 aspect-h-100 group-hover:opacity-90">
+                                        {product}
                                         <img
-                                            src={product.imageSrc}
-                                            alt={product.imageAlt}
+                                            src={product}
+                                            alt="image"
                                             className="w-full h-full object-center"
                                         />
                                     </div>
@@ -194,8 +267,13 @@ export default function AlbumPhotoList() {
                                                 className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                                             >
                                                 <span>Upload a Photo</span>
-                                                <input id="file-upload" name="file-upload" type="file"
-                                                       className="sr-only"/>
+                                                <input
+                                                    id="file-upload"
+                                                    name="file-upload"
+                                                    type="file"
+                                                    onChange={uploadImage}
+                                                    multiple
+                                                    className="sr-only"/>
                                             </label>
                                             <p className="pl-1">or drag and drop</p>
                                         </div>
